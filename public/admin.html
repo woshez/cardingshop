@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Admin - Products</title>
+    <link rel="stylesheet" href="/style.css">
+    <style>
+      #auth-navbar-mount { margin-bottom: 0; }
+    </style>
+  </head>
+  <body>
+    <div id="auth-navbar-mount"></div>
+    <header>
+      <h1>Product Admin</h1>
+      <a href="/" style="color:#fff; text-decoration:none">Store</a>
+    </header>
+    <main>
+      <section style="flex:1">
+        <h2>Products</h2>
+        <table id="products-table" style="width:100%; border-collapse:collapse">
+          <thead>
+            <tr>
+              <th style="text-align:left">ID</th>
+              <th style="text-align:left">Name</th>
+              <th style="text-align:left">Price</th>
+              <th style="text-align:left">Category</th>
+              <th style="text-align:left">Image</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+      <aside style="width:320px; padding-left:16px">
+        <h2 id="form-title">Add Product</h2>
+        <form id="product-form">
+          <input type="hidden" id="prod-id">
+          <div>
+            <label>Name</label><br>
+            <input id="prod-name" required style="width:100%">
+          </div>
+          <div>
+            <label>Price</label><br>
+            <input id="prod-price" type="number" step="0.01" required style="width:100%">
+          </div>
+          <div>
+            <label>Image URL</label><br>
+            <input id="prod-image" style="width:100%">
+          </div>
+          <div>
+            <label>Category</label><br>
+            <input id="prod-category" placeholder="Uncategorized" style="width:100%">
+          </div>
+          <div>
+            <label>Full Details (hidden until purchased)</label><br>
+            <textarea id="prod-details" style="width:100%; height:80px; resize:vertical"></textarea>
+          </div>
+          <div style="margin-top:8px">
+            <button id="save">Save</button>
+            <button id="cancel" type="button">Cancel</button>
+          </div>
+        </form>
+
+        <hr style="margin-top:20px">
+        <h3>Admin Users</h3>
+        <div>
+          <label>Promote user to admin</label><br>
+          <input id="promote-user-id" type="number" placeholder="User ID" style="width:100%">
+        </div>
+        <div style="margin-top:8px">
+          <button id="promote-btn">Promote</button>
+        </div>
+        <div id="promote-result" style="margin-top:8px; font-size:12px"></div>
+        
+        <hr style="margin-top:20px">
+        <h3>Categories</h3>
+        <div>
+          <label>New Category</label><br>
+          <input id="new-category-name" placeholder="Category name" style="width:100%">
+        </div>
+        <div style="margin-top:8px">
+          <button id="add-category">Add Category</button>
+        </div>
+        <div id="categories-list" style="margin-top:8px; font-size:14px"></div>
+
+        <hr style="margin-top:20px">
+        <h3>Site Settings</h3>
+        <div>
+          <label>Site Name</label><br>
+          <input id="site-name" placeholder="carding shop" style="width:100%">
+        </div>
+        <div style="margin-top:8px">
+          <label>Theme Color</label><br>
+          <input id="theme-color" type="color" value="#1e90ff" style="width:100%">
+        </div>
+        <div style="margin-top:8px">
+          <label>Logo (PNG/JPG)</label><br>
+          <input id="logo-file" type="file" accept="image/*">
+        </div>
+        <div style="margin-top:8px">
+          <img id="logo-preview" src="" alt="logo preview" style="max-width:100%; max-height:80px; display:none; border:1px solid #ccc; padding:4px">
+        </div>
+        <div style="margin-top:8px">
+          <button id="save-settings">Save Settings</button>
+          <button id="reset-logo" type="button" style="margin-left:8px">Reset Logo</button>
+        </div>
+        <div id="settings-result" style="margin-top:8px; font-size:12px"></div>
+
+        <hr style="margin-top:20px">
+        <h3>Login Page Customization</h3>
+        <div>
+          <label>Login Background Color</label><br>
+          <input id="login-bg" type="color" value="#f0f0f0" style="width:100%">
+        </div>
+        <div style="margin-top:8px">
+          <label>Login Logo (PNG/JPG)</label><br>
+          <input id="login-logo-file" type="file" accept="image/*">
+        </div>
+        <div style="margin-top:8px">
+          <img id="login-logo-preview" src="" alt="login logo preview" style="max-width:100%; max-height:80px; display:none; border:1px solid #ccc; padding:4px">
+        </div>
+        <div style="margin-top:8px">
+          <button id="save-login-settings" type="button">Save Login Settings</button>
+          <button id="reset-login-logo" type="button" style="margin-left:8px">Reset Login Logo</button>
+        </div>
+        <div id="login-settings-result" style="margin-top:8px; font-size:12px"></div>
+
+        <hr style="margin-top:20px">
+        <hr style="margin-top:20px">
+        <h3>Posts</h3>
+        <div>
+          <label>New Post Title</label><br>
+          <input id="post-title" placeholder="Title" style="width:100%">
+        </div>
+        <div style="margin-top:8px">
+          <label>Content</label><br>
+          <textarea id="post-content" style="width:100%; height:80px"></textarea>
+        </div>
+        <div style="margin-top:8px">
+          <button id="create-post">Create Post</button>
+        </div>
+        <div id="posts-list" style="margin-top:8px; font-size:14px"></div>
+
+        <hr style="margin-top:20px">
+        <h3>Wallet Configuration</h3>
+        <div>
+          <label>Crypto Wallet Address</label><br>
+          <input id="wallet-address" placeholder="0x..." style="width:100%">
+        </div>
+        <div style="margin-top:8px">
+          <button id="save-wallet">Save Wallet</button>
+        </div>
+        <div id="wallet-result" style="margin-top:8px; font-size:12px"></div>
+      </aside>
+    </main>
+    <script src="/admin.js"></script>
+  </body>
+</html>

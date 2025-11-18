@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Register</title>
+    <link rel="stylesheet" href="/style.css">
+    <style>
+      #register-container { max-width: 400px; margin: 32px auto; padding: 16px; border: 1px solid #ddd; }
+      #register-container input { width: 100%; padding: 8px; margin: 4px 0; }
+      #register-container div { margin: 12px 0; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Register</h1>
+      <a href="/" style="color:#fff; text-decoration:none">Store</a>
+    </header>
+    <main style="display:block">
+      <div id="register-container">
+        <h2>Create Account</h2>
+        <form id="register-form">
+          <div>
+            <label>Full Name</label><br>
+            <input id="reg-name" required>
+          </div>
+          <div>
+            <label>Email</label><br>
+            <input id="reg-email" type="email" required>
+          </div>
+          <div>
+            <label>Password</label><br>
+            <input id="reg-password" type="password" required>
+          </div>
+          <div>
+            <label>Confirm Password</label><br>
+            <input id="reg-password-confirm" type="password" required>
+          </div>
+          <div>
+            <button type="submit">Register</button>
+          </div>
+        </form>
+        <div id="register-error" style="color:red; margin-top:12px"></div>
+        <div style="margin-top:16px">
+          Already have an account? <a href="/login.html">Login</a>
+        </div>
+      </div>
+    </main>
+    <script src="/register.js"></script>
+  </body>
+</html>

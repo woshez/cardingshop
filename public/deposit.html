@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Deposit</title>
+    <link rel="stylesheet" href="/style.css">
+    <style>
+      #auth-navbar-mount { margin-bottom: 0; }
+    </style>
+  </head>
+  <body>
+    <div id="auth-navbar-mount"></div>
+    <header>
+      <h1>Deposit (Crypto)</h1>
+      <a href="/" style="color:#fff; text-decoration:none">Store</a>
+    </header>
+    <main>
+      <section style="flex:1">
+        <div id="auth-status" style="margin-bottom:16px; padding:12px; background:#eee; border-radius:4px"></div>
+
+        <h2>Create / Select User</h2>
+        <div>
+          <label>Name (new user)</label><br>
+          <input id="user-name" style="width:300px">
+        </div>
+        <div>
+          <label>Email</label><br>
+          <input id="user-email" style="width:300px">
+        </div>
+        <div>
+          <label>Password</label><br>
+          <input id="user-password" type="password" style="width:300px">
+        </div>
+        <div style="margin-top:8px">
+          <button id="create-user">Create User</button>
+          <a href="/login.html" style="margin-left:12px">Login</a>
+        </div>
+        <div style="margin-top:12px">
+          <label>Or enter your User ID</label><br>
+          <input id="user-id" style="width:100px">
+          <button id="load-user">Load User</button>
+        </div>
+        <div id="user-info" style="margin-top:12px"></div>
+
+        <h2 style="margin-top:18px">Initiate Deposit</h2>
+        <div>
+          <label>Amount (USD, minimum $20)</label><br>
+          <input id="deposit-amount" type="number" step="0.01" style="width:120px">
+        </div>
+        <div style="margin-top:8px">
+          <label>Payment Method</label><br>
+          <select id="payment-method"><option value="crypto">Crypto</option></select>
+        </div>
+        <div style="margin-top:8px">
+          <button id="start-deposit">Start Deposit</button>
+        </div>
+
+        <div id="deposit-result" style="margin-top:16px"></div>
+      </section>
+    </main>
+    <script src="/deposit.js"></script>
+  </body>
+</html>

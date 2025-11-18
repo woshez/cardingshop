@@ -1,0 +1,95 @@
+<!-- Auth Navbar Component -->
+<style>
+  #auth-navbar {
+    background: var(--nav-bg, #222);
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 14px;
+  }
+  #auth-left { display:flex; align-items:center; gap:12px }
+  #auth-left img { height:36px; max-width:200px }
+  #auth-navbar a, #auth-navbar button {
+    color: #fff;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 4px 8px;
+  }
+  #auth-navbar a:hover, #auth-navbar button:hover {
+    background: #444;
+    border-radius: 4px;
+  }
+</style>
+
+<div id="auth-navbar">
+  <div id="auth-left">
+    <img id="site-logo" src="" alt="logo" style="display:none">
+    <a href="/" id="site-name" style="color:#fff; font-weight:600; text-decoration:none">carding shop</a>
+  </div>
+  <div id="auth-right">
+    <div id="balance-display" style="display:none; margin-right:12px">Balance: $<span id="balance-amount">0.00</span></div>
+    <span id="user-display"></span>
+    <button id="logout-btn" style="display:none">Logout</button>
+    <a href="/login.html" id="login-link">Login</a>
+    <a href="/register.html" id="register-link">Register</a>
+  </div>
+</div>
+
+<script>
+  async function loadSettingsForNav() {
+    try {
+      const res = await fetch('/api/settings');
+      if (!res.ok) return;
+      const s = await res.json();
+      if (s.themeColor) document.documentElement.style.setProperty('--nav-bg', s.themeColor);
+      if (s.siteName) document.getElementById('site-name').textContent = s.siteName;
+      if (s.logoPath) {
+        const img = document.getElementById('site-logo');
+        img.src = s.logoPath;
+        img.style.display = 'block';
+      }
+    } catch (e) {
+      console.error('Failed to load settings:', e);
+    }
+  }
+
+  async function checkAuth() {
+    try {
+      const res = await fetch('/api/me');
+      if (res.ok) {
+        const user = await res.json();
+        document.getElementById('user-display').textContent = 'Logged in: ' + user.name;
+        document.getElementById('balance-amount').textContent = user.balance.toFixed(2);
+        document.getElementById('balance-display').style.display = 'block';
+        document.getElementById('logout-btn').style.display = 'inline';
+        document.getElementById('login-link').style.display = 'none';
+        document.getElementById('register-link').style.display = 'none';
+      } else {
+        document.getElementById('user-display').textContent = '';
+        document.getElementById('balance-display').style.display = 'none';
+        document.getElementById('logout-btn').style.display = 'none';
+        document.getElementById('login-link').style.display = 'inline';
+        document.getElementById('register-link').style.display = 'inline';
+      }
+    } catch (e) {
+      console.error('Auth check failed:', e);
+    }
+  }
+
+  document.getElementById('logout-btn').addEventListener('click', async () => {
+    try {
+      await fetch('/api/logout', { method: 'POST' });
+      alert('Logged out');
+      window.location.href = '/';
+    } catch (e) {
+      alert('Logout failed');
+    }
+  });
+
+  loadSettingsForNav();
+  checkAuth();
+</script>
