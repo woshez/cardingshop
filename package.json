@@ -1,0 +1,17 @@
+{
+  "name": "simple-online-store",
+  "version": "0.1.0",
+  "description": "Minimal online store (Node + Express + static frontend)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "bcryptjs": "^2.4.3"
+  }
+}
